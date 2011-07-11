@@ -14,6 +14,7 @@ class Bit(models.Model):
 	title = models.CharField(max_length=255)
 	note = models.TextField()
 	
+	status = models.ForeignKey('Status')
 	tags = models.ManyToManyField('Tags')
 	
 	hash = models.CharField(max_length=40)
