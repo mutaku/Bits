@@ -1,5 +1,10 @@
 from django.db import models
 
+StatusChoices = (
+		( 0 , 'Open'),
+		( 1 , 'Closed'),
+	)
+
 class Bit(models.Model):
 	
 	user = models.CharField(max_length=30)
@@ -22,3 +27,10 @@ class Tags(models.Model):
 		
 	def __unicode__(self):		
 		return u"%s" % self.tagtext
+
+class Status(models.Model):
+	
+	switch = models.IntegerField(max_length=1,choices=StatusChoices,default=0)
+
+	def __unicode__(self):
+		return u"%s" % self.switch
