@@ -1,4 +1,5 @@
 from django.db import models
+from utils.handlers import Hasher
 
 StatusChoices = (
 		( 0 , 'Open'),
@@ -7,31 +8,23 @@ StatusChoices = (
 
 class Bit(models.Model):
 	
-	user = models.CharField(max_length=30)
-	date = models.DateTimeField(auto_now_add=True)
-	modified = models.DateTimeField(auto_now=True)
+	user = models.CharField("Created by",max_length=30)
+	date = models.DateTimeField("Date created",auto_now_add=True,unique=True)
+	modified = models.DateTimeField("Last modified",auto_now=True)
 	
-	title = models.CharField(max_length=255)
-	note = models.TextField()
+	title = models.CharField("Title",max_length=255)
+	note = models.TextField("Note")
 	
-	status = models.ForeignKey('Status')
-	tags = models.ManyToManyField('Tags')
+	status = models.IntegerField("Status",max_length=1,choices=StatusChoices,default=0)
+	tag = models.CharField("Associated tag",max_length=25)
 	
-	hash = models.CharField(max_length=40)
+	hash = models.CharField("Reachable URL",max_length=10)
 
 	def __unicode__(self):
 		return u"%s" % self.title
 
-class Tags(models.Model):
-	
-	tagtext = models.CharField(max_length=50,unique=True)
-		
-	def __unicode__(self):		
-		return u"%s" % self.tagtext
+	def save(self, *args, **kwargs):
+		super(Bit, self).save(*args, **kwargs)
+		if len(self.hash)!=10:
+			self.hash = Hasher(self.date.__str__()).sha1()[:10]
 
-class Status(models.Model):
-	
-	switch = models.IntegerField(max_length=1,choices=StatusChoices,default=0)
-
-	def __unicode__(self):
-		return u"%s" % self.switch
