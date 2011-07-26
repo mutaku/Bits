@@ -3,7 +3,8 @@ from django.contrib import admin
 from utils.handlers import Hasher
 
 class bitAdmin(admin.ModelAdmin):
-	
+
+	list_fields = ['title','user','url']	
 	search_fields = ['tag']
 	list_filter = ['tag','status']
 	
