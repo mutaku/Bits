@@ -9,7 +9,7 @@ StatusChoices = (
 class Bit(models.Model):
 	
 	user = models.CharField("Created by",max_length=30)
-	url = models.CharField("Reachable URL",max_length=10,editable=False,unique=True)
+	url = models.CharField("Reachable URL",max_length=10,blank=True,editable=False)
 
 	date = models.DateTimeField("Date created",auto_now_add=True,unique=True)
 	modified = models.DateTimeField("Last modified",auto_now=True)
