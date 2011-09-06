@@ -1,0 +1,37 @@
+# Make a copy of this file as local_settings.py
+# FILL IN THE VARIABLES BELOW WITH YOUR PERTINENT INFORMATION
+
+ADMINS = (
+    ('yourname', 'youremail@domain.com'),
+)
+
+MANAGERS = ADMINS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'bits.db',                      # Or path to database file if using sqlite3.
+        'USER': 'DB_USER',                      # Not used with sqlite3.
+        'PASSWORD': 'DB_PASSWORD',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Make this unique, and don't share it with anybody.
+# FILL THIS IN WITH YOUR KEY OR MAKE ONE 
+SECRET_KEY = 'generate your key with tools/gimmekey.py'
+
+# IMGUR API
+imgur = {
+        'anon_key' : 'get from imgur.com'
+    }
+
+# Amazon API stuffs
+amazon = {
+        'access_key' : 'get from amazon',
+        'secret_key' : 'get from amazon' 
+    }
+
+# This is already assigned in settings.py as True but you can override here for simplicity
+DEBUG = True
